@@ -1,0 +1,45 @@
+@media screen and (min-width: 768px ) {
+    // after 768px
+    ul {
+        display: flex !important;
+
+        // .dropdown-content {
+        //     display: none;
+        // }
+    }
+
+    .searchbox {
+        display: inline !important;
+    }
+
+    .hamburger-menu {
+        display: none !important;
+    }
+
+    
+}
+
+@media screen and (min-width: 800px) {
+    .main-page-browse {
+
+        .main-cards {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+}
+
+// @media screen and (max-width: 768px) {
+//     nav {
+//         padding-inline: 30px;
+//         justify-content: space-between;
+//         ul {
+//             display: none;
+//         }
+
+//         .searchbox {
+//             display: none;
+//         }
+//     }
+// }
+
