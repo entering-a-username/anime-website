@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
+import Browse from "./components/Browse";
 
 
 function App() {
@@ -15,13 +16,12 @@ function App() {
         {/* <Header />
         <NewFeature /> */}
 
-        <Home />
         <main>
           <Routes>
-            <Route path="/" element={Home} />
+            <Route path="/" element={<Home />} />
+            <Route path="/browse" element={<Browse />} />
             
 
-            <Route path="/about"></Route>
           </Routes>
           {/* <Browse /> */}
 

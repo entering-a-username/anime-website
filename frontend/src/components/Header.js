@@ -4,20 +4,20 @@ export default function Header() {
     const headerObj = {
         1: {
             id: 1,
-            img: "../../public/img",
+            img: "../../public/img/header/header-1.png",
             h1: "Rate the animes you love or hate and join the discussions with our community.",
             btn: "Join Us",
             
         },
         2: {
             id: 2,
-            img: "../../public/img",
+            img: "../../public/img/header/header-1.png",
             h1: "Discover new anime and manga with one click or test your fate",
             btn: "Recommend",
         },
         3: {
             id: 3,
-            img: "../../public/img",
+            img: "../../public/img/header/header-1.png",
             h1: "Don't miss upcoming released with our calendar",
             btn: "Join Us",
         }
@@ -33,9 +33,9 @@ export default function Header() {
     <>
         <header>
 {/* change with transition */}
-
+    <img src="../../public/img/header/header-1.png" alt="" />
             <div className="header-info">
-                <img src={selectedHeader.src} alt="" />
+                <img src={selectedHeader.img} alt="" />
                 <h1>{selectedHeader.h1}</h1>
                 <button>{selectedHeader.btn}</button>
 
