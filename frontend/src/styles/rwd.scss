@@ -8,15 +8,27 @@
         // }
     }
 
-    .searchbox {
-        display: inline !important;
+    .sidebar {
+        display: none;
+    }
+
+    // .searchbox {
+    //     display: inline !important;
+    // }
+
+    .icons {
+        display: flex !important;
     }
 
     .hamburger-menu {
         display: none !important;
     }
 
-    
+    footer {
+        .footer-div {
+            flex-direction: row;
+        }
+    }
 }
 
 @media screen and (min-width: 800px) {
@@ -25,6 +37,20 @@
         .main-cards {
             flex-wrap: wrap;
             justify-content: center;
+        }
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    footer {
+        flex-direction: row;
+
+        .footer-div {
+            flex-direction: column;
+        }
+
+        .info {
+            padding: 0px 50px;
         }
     }
 }

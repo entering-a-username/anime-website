@@ -1,13 +1,10 @@
 import React from 'react'
-
 export default function Sidebar({ className }) {
   return (
     <>
     
             <div className={`sidebar ${className}`}>
-                <a href="">
-                    <img src="" alt="" />
-                </a>
+                <span className='logo-span'>Animanga</span>
 
                 <div className="searchbox">
                     <input type="text" placeholder='Search...' />

@@ -1,24 +1,40 @@
 import "./styles/main.scss";
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
-import Header from "./components/Header";
-import NewFeature from "./components/NewFeature";
-import Browse from "./components/Browse";
+import Home from "./components/Home";
 import Footer from "./components/Footer";
+
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Header />
-      <NewFeature />
+      <Router>
+        <Navbar />
+        {/* <Header />
+        <NewFeature /> */}
 
-      <main>
-        <Browse />
+        <Home />
+        <main>
+          <Routes>
+            <Route path="/" element={Home} />
+            
 
-      </main>
+            <Route path="/about"></Route>
+          </Routes>
+          {/* <Browse /> */}
 
-      <Footer />
+          {/* <div className="community">
+            <Forums />
+            <Polls />
+
+          </div> */}
+
+        </main>
+
+        <Footer />
+      </Router>
 
       {/* SCROLLER */}
       {/* ANIMANG QUIZ?> */}

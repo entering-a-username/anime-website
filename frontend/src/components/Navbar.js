@@ -1,54 +1,110 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
+import {Link, useLocation} from "react-router-dom"
 import Sidebar from './Sidebar'
+import { RiMoonClearLine, RiSunLine, RiUserFill, RiSearch2Line, RiArrowDownSLine, RiMoonLine } from '@remixicon/react'
 
 export default function Navbar() {
     const [navState, setNavState] = useState(false);
-    console.log(navState)
     function toggleNav() {
-
         setNavState(!navState);
-        console.log(navState)
-    } 
+    }
+
+    const [searchState, setSearchState] = useState(false);
+    function toggleSearch() {
+        setSearchState(!searchState);
+    }
+
+    const [themeState, setThemeState] = useState(() => {
+        const savedTheme = localStorage.getItem("theme");
+        // false = light mode
+        return savedTheme ? JSON.parse(savedTheme) : false;
+    });
+    function toggleTheme() {
+        setThemeState(previousTheme => {
+            const newTheme = !previousTheme;
+            localStorage.setItem("theme", JSON.stringify(newTheme));
+            return newTheme;
+        });
+    }
+
+    useEffect(() => {
+        if (themeState) {
+            document.body.classList.add("dark");
+        } else {
+            document.body.classList.remove("dark");
+        }
+    }, [themeState])
+
+    // useLocation hook
+    const location = useLocation();
+
+    const links = [
+        {
+            name: "Home", path: "/",
+        },
+        {
+            name: "Browse", path: "/browse",
+        },
+        {
+            name: "Recommend", path: "/recommend",
+        }
+    ]
 
   return (
     <>
     
         <nav>
             {/* LOGO */}
-            <a href="">
-                <img src="" alt="" />
-            </a>
+            <Link to="/">
+                <span className='logo-span'>Animanga</span>
+            </Link>
 
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/recommend">Recommend</a></li>
+                { links.map(link => (
+                      <Link to={link.path} className={`nav-link ${location.pathname === link.path ? "active" : ""}`} key={link.name}>
+                        <li className='nav-link'>{link.name}</li>
+                      </Link>
+                )) }
+                
 
                 <div className="dropdown">
                     <li className='dropdown-el'>
                         <span>Community</span>
-                        {/* <i className="ri-arrow-down-s-line"></i> */}
+                        <RiArrowDownSLine size={18} />
                     </li>
 
                     <div className='dropdown-content'>
-                        <a href="/forums">Forums</a>
-                        <a href="/polls">Polls</a>
+                        <Link to="/forums" className={`${location.pathname == "/forums" ? "active" : ""}`}>Forums</Link>
+                        <Link to="/polls" className={`${location.pathname == "/polls" ? "active" : ""}`}>Polls</Link>
                     </div>
                 </div>
             </ul>
 
-            <div className="searchbox">
-                <input type="text" placeholder='Search...' />
-                <button className='search-btn'>
-                    {/* <i></i> */}
-                </button>
+           
+
+            <div className="icons">
+                <div className={`searchbox ${searchState ? "active" : ""}`}>
+                        <RiSearch2Line className="search-icon" onClick={toggleSearch} />
+                        <input type="text" placeholder='Search...' />
+                </div>
+
+                {(localStorage.getItem("theme") == "false" ? <RiMoonLine onClick={toggleTheme} /> : <RiSunLine onClick={toggleTheme} /> )}
+                
+                <div className='user-div'>
+                    <RiUserFill className="dropdown-el" />
+
+                    <div className='dropdown-content'>
+                        <Link to="/login" className={`${location.pathname == "/login" ? "active" : ""}`}>Login</Link>
+                        <Link to="/signup" className={`${location.pathname == "/signup" ? "active" : ""}`}>Signup</Link>
+                    </div>
+                </div>
+            
             </div>
 
             {/* if user */}
 
 
-{/*  ${navState ? 'active' : ''} */}
             <div className={`hamburger-menu ${navState ? "active" : ""}`} onClick={toggleNav}>
                 <div className="bar"></div>
                 <div className="bar"></div>
