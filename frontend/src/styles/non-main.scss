@@ -1,0 +1,141 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-color-light: #fff;
+    --color-light: black;
+
+    --nav-height: 70px;
+
+    // dark
+
+}
+
+
+main.browse {
+    padding-top: calc(var(--nav-height) + 20px);
+    padding-inline: 50px;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        text-align: center;
+    }
+
+    .input-div {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 20px;
+        padding-bottom: 30px;
+
+
+        div {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            input {
+                min-width: 300px;
+                padding: 12px 20px;
+                border-radius: 30px;
+                padding-right: 40px;
+            }
+
+            .search-icon {
+                position: absolute;
+                right: 15px;
+                cursor: pointer;
+            }
+        }
+
+        button {
+            padding: 2px 16px;
+            background: transparent;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+
+    }
+}
+
+main.recommend {
+    height: 100vh;
+    text-align: center;
+    padding-top: calc(var(--nav-height) + 30px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 30px;
+
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h3 {
+        font-size: 1.5em;
+    }
+
+    .btns {
+        display: flex;
+        gap: 25px;
+
+        button {
+            cursor: pointer;
+            background: transparent;
+            border: 2px solid black;
+            padding: 15px 20px;
+            margin-top: 16px;
+            font-size: 1.05em;
+            transition: 400ms ease-in-out;
+
+            &:hover {
+                border-color: #888;
+            }
+        }
+    }
+    
+    span {
+        margin-top: 10px;
+        a {
+            text-decoration: underline;
+            font-style: italic;
+        }
+    }
+
+    .card {
+        cursor: pointer;
+    }
+}
+
+
+
+
+
+
+// signup
+
+main.signup {
+    padding-top: calc(var(--nav-height) + 30px);
+    // padding-top: 100px;
+
+    display: flex;
+    justify-content: center;
+    background-color: gray;
+
+    .signup-div {
+        border: 2px solid white;
+        background-color: rgb(31, 41, 55);
+    }
+
+}
+
+
+
+@import "./rwd.scss";

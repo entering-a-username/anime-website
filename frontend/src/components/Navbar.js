@@ -2,6 +2,9 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import {Link, useLocation} from "react-router-dom"
 import Sidebar from './Sidebar'
+import Login from './Login'
+import Signup from './Signup'
+
 import { RiMoonClearLine, RiSunLine, RiUserFill, RiSearch2Line, RiArrowDownSLine, RiMoonLine } from '@remixicon/react'
 
 export default function Navbar() {
@@ -95,8 +98,8 @@ export default function Navbar() {
                     <RiUserFill className="dropdown-el" />
 
                     <div className='dropdown-content'>
-                        <Link to="/login" className={`${location.pathname == "/login" ? "active" : ""}`}>Login</Link>
-                        <Link to="/signup" className={`${location.pathname == "/signup" ? "active" : ""}`}>Signup</Link>
+                        <Link to="/login" element={<Login />} className={`${location.pathname == "/login" ? "active" : ""}`}>Login</Link>
+                        <Link to="/signup" element={<Signup />} className={`${location.pathname == "/signup" ? "active" : ""}`}>Signup</Link>
                     </div>
                 </div>
             

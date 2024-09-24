@@ -2,9 +2,6 @@ import React, {useState, useEffect} from 'react'
 import { RiBookmarkLine, RiEditLine } from '@remixicon/react';
 
 export default function _Browse() {
-    // display more functionality?
-    
-// sidplay in separe tjs fo reuse?
     const [animeData, setAnimeData] = useState([]);
     const [mangaData, setMangaData] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("Anime");

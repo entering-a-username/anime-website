@@ -1,5 +1,5 @@
 @import "./animations.scss";
-@import "./browse.scss";
+@import "./non-main.scss";
 
 * {
     padding: 0;
@@ -20,6 +20,7 @@
 body {
     // background-color: red;
     position: relative;
+    height: 100vh;
 }
 
 body.dark {
@@ -436,6 +437,10 @@ header {
             border-color: rgba(124, 120, 120, 0.849);
             color: rgba(124, 120, 120, 0.849);
         }
+    }
+
+    img {
+        
     }
 
 

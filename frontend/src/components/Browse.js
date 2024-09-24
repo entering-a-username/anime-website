@@ -7,17 +7,18 @@ export default function Browse() {
         <main className="browse">
             <h1>Search for your favorite animanga by filtering</h1>
     
-            <div className="">
+    {/* form */}
+            <div className="input-div">
                 <div className="">
                     <input type="text" />
-                    <RiSearchLine />
+                    <RiSearchLine className="search-icon" />
                 </div>
 
                 <button>Filter</button>    
             </div> 
 
             <div className="filter-div">
-                
+
             </div>
 
         </main>
