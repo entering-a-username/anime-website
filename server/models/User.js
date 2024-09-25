@@ -24,9 +24,15 @@ userSchema.pre("save", async function(next) {
     next();
 })
 
-userSchema.post("save", function(next) {
+userSchema.post("save", function(doc, next) {
+    console.log("new user created");
     next();
 })
+
+// custom login functionality
+userSchema.statics.login = async function(username_email, password) {
+
+}
 
 const User = mongoose.model("user", userSchema);
 

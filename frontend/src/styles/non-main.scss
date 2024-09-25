@@ -121,17 +121,95 @@ main.recommend {
 
 // signup
 
-main.signup {
-    padding-top: calc(var(--nav-height) + 30px);
+main.signup, main.login {
+    height: 100vh;
+    padding-top: calc(var(--nav-height) + 70px);
     // padding-top: 100px;
 
     display: flex;
     justify-content: center;
     background-color: gray;
 
-    .signup-div {
+    .signup-div, .login-div {
+        min-width: 450px;
+        border-radius: 16px;
         border: 2px solid white;
         background-color: rgb(31, 41, 55);
+        padding: 20px 25px;
+        gap: 15px;
+        height: fit-content;
+        text-align: left;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            button {
+                color: white;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 1.2em;
+            }
+
+            p {
+                color: white;
+                margin-top: 10px;
+                margin-bottom: 20px;
+
+                a {
+                    color: red;
+                }
+            }
+        }
+
+        h1 {
+            color: white;
+            font-size: 1.75em;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            // pimary color
+        }
+
+        .label-input {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            label {
+                color: white;
+                font-size: 1.1em;
+            }
+
+            input {
+                font-size: 1.1em;
+                padding-inline: 10px;
+                padding-block: 12px;
+                border-radius: 10px;
+                border: none;
+                // change input outline
+            }
+        }
+
+        .terms-div {
+            color: white;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+
+            div {
+                display: flex;
+            }
+
+            input {
+                cursor: pointer;
+            }
+
+            a {
+                color: red;
+            }
+        }
     }
 
 }
