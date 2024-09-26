@@ -7,7 +7,7 @@ import Signup from './Signup'
 
 import { RiMoonClearLine, RiSunLine, RiUserFill, RiSearch2Line, RiArrowDownSLine, RiMoonLine } from '@remixicon/react'
 
-export default function Navbar() {
+export default function Navbar({user, logout}) {
     const [navState, setNavState] = useState(false);
     function toggleNav() {
         setNavState(!navState);
@@ -98,8 +98,23 @@ export default function Navbar() {
                     <RiUserFill className="dropdown-el" />
 
                     <div className='dropdown-content'>
-                        <Link to="/login" element={<Login />} className={`${location.pathname == "/login" ? "active" : ""}`}>Login</Link>
-                        <Link to="/signup" element={<Signup />} className={`${location.pathname == "/signup" ? "active" : ""}`}>Signup</Link>
+                        {user ? (
+                            <>
+                                <Link to="/profile" className={`${location.pathname === '/profile' ? 'active' : ''}`}>
+                                        Profile
+                                </Link>
+                                <Link to="/settings" className={`${location.pathname === '/settings' ? 'active' : ''}`}>
+                                        Settings
+                                </Link>
+                                <Link to="/" onClick={logout}>Logout</Link>
+                            </>
+                        ) : (
+                            <>
+                                <Link to="/login" element={<Login />} className={`${location.pathname == "/login" ? "active" : ""}`}>Login</Link>
+                                <Link to="/signup" element={<Signup />} className={`${location.pathname == "/signup" ? "active" : ""}`}>Signup</Link>
+                            </>
+                        )}
+                        
                     </div>
                 </div>
             

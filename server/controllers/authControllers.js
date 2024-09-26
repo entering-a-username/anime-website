@@ -5,7 +5,9 @@ require("dotenv").config();
 
 // ERROR HANDLING
 const handleErrors = (err) => {
-   
+   const errors = {username: "", email: "", password: ""};
+
+
 }
 
 const maxAge = 3 * 24 * 60 * 60;
@@ -46,9 +48,10 @@ module.exports.login_post = async (req, res) => {
     const { username_email, password } = req.body;
 
     try {
+        console.log("bedore")
         const user = await User.login(username_email, password);
         const token = createToken(user._id);
-
+        console.log(user)
         res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
         res.status(200).json({ user: user._id });
     } catch (err) {
@@ -59,3 +62,12 @@ module.exports.login_post = async (req, res) => {
 // why get not async
 
 // LOGOUT
+module.exports.logout_get = (req, res) => {
+    res.cookie('jwt', '', { maxAge: 1, httpOnly: true});
+    res.redirect('/');
+}
+
+// USER
+module.exports.user_get = async (req, res) => {
+    // need middleware
+}

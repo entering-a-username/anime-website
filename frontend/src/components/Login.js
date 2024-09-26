@@ -17,6 +17,7 @@ export default function Login() {
       setPasswordError('');
 
       // sending to backend
+      console.log(username_email)
       try {
           const res = await fetch('http://localhost:3050/login', {
             method: 'POST',
@@ -43,17 +44,21 @@ export default function Login() {
 
       <main className="login">
         <div className='login-div'>
-          <form action="#">
+          <form onSubmit={handleSubmit}>
               <h1>Create an account</h1>
               <div className='label-input'>
                   <label htmlFor="email_username">Your email or username</label>
-                  <input type="text" name="email_username" placeholder="email or username" required={true} />
+                  <input 
+                    onChange={(e) => setUsername_email(e.target.value)}
+                    value={username_email} type="text" name="email_username" placeholder="email or username" required={true} />
               </div>
               <div className="error email_username"></div>
 
               <div className='label-input'>
                   <label htmlFor="password">Password</label>
-                  <input type="password" name="password" placeholder="••••••••" required={true} />
+                  <input
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password} type="password" name="password" placeholder="••••••••" required={true} />
               </div>
               <div className="error password"></div>
               
