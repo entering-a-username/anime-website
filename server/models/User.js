@@ -31,9 +31,9 @@ userSchema.post("save", function(doc, next) {
 
 // custom login functionality
 userSchema.statics.login = async function(username_email, password) {
-    console.log(username_email)
+    
     let param = username_email.includes("@") ? {email: username_email} : {username: username_email};
-    console.log(param)
+    
     const user = await this.findOne(param);
 
     if (user) {

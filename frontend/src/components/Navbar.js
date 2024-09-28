@@ -37,7 +37,7 @@ export default function Navbar({user, logout}) {
         } else {
             document.body.classList.remove("dark");
         }
-    }, [themeState])
+    }, [themeState]);
 
     // useLocation hook
     const location = useLocation();
@@ -58,7 +58,6 @@ export default function Navbar({user, logout}) {
     <>
     
         <nav>
-            {/* LOGO */}
             <Link to="/">
                 <span className='logo-span'>Animanga</span>
             </Link>
@@ -106,7 +105,7 @@ export default function Navbar({user, logout}) {
                                 <Link to="/settings" className={`${location.pathname === '/settings' ? 'active' : ''}`}>
                                         Settings
                                 </Link>
-                                <Link to="/" onClick={logout}>Logout</Link>
+                                <Link to="user" onClick={logout}>Logout</Link>
                             </>
                         ) : (
                             <>
@@ -119,8 +118,6 @@ export default function Navbar({user, logout}) {
                 </div>
             
             </div>
-
-            {/* if user */}
 
 
             <div className={`hamburger-menu ${navState ? "active" : ""}`} onClick={toggleNav}>

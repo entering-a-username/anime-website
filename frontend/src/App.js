@@ -13,23 +13,32 @@ import Signup from "./components/Signup";
 
 
 function App() {
+  // ?????????// one /user check??
+  // one user check or for every route
+
   const [user, setUser] = useState(null);
 
+  function extractCookie(cookie) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${cookie}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
+
+  const jwt = extractCookie("jwt");
+  console.log(jwt)
+
   useEffect(() => {
-    // fetch("/user", {
-    //   method: "GET",
-    //   credentials: "include", // Include cookies if using sessions
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     if (data.user) {
-    //       setUser(data.user);  // Set the user if authenticated
-    //     }
-    //   })
     const fetchUser = async () => {
       try {
         console.log("happen")
-        const res = await fetch("/user")
+        const res = await fetch("http://localhost:3050/user", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            'Authorization': `${jwt}`,
+          }
+        });
+        console.log(res)
         if (!res.ok) {
 
         } 
@@ -37,9 +46,12 @@ function App() {
         const data = await res.json();
         console.log(data)
 
-        if (data.user) {
-          setUser(data.user);
+        if (data._id) {
+          setUser(data._id);
+          console.log(user)
         }
+
+        console.log(user)
       } catch (err) {
 
       }
@@ -48,12 +60,15 @@ function App() {
     fetchUser()
   }, []);
 
+  console.log(user)
+
   async function logout() {
-    await fetch("/logout", {
+    await fetch("http://localhost:3050/logout", {
       method: "GET", credentials: "include",
     }).then(res => res.json())
     .then(() => {
       setUser(null);
+      window.location.href = "/";
     })
   }
   

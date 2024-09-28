@@ -8,9 +8,7 @@ export default function Sidebar({ className }) {
 
                 <div className="searchbox">
                     <input type="text" placeholder='Search...' />
-                    <button className='search-btn'>
-                        {/* <i></i> */}
-                    </button>
+                    <button className='search-btn'></button>
                 </div>
 
                 <ul>

@@ -1,20 +1,18 @@
+// medium screen, after 76px
 @media screen and (min-width: 768px ) {
-    // after 768px
-    ul {
-        display: flex !important;
-
-        // .dropdown-content {
-        //     display: none;
-        // }
+    nav {
+        ul {
+            display: flex !important;
+    
+            li {
+                font-size: 85%;
+            }
+        }
     }
 
     .sidebar {
         display: none;
     }
-
-    // .searchbox {
-    //     display: inline !important;
-    // }
 
     .icons {
         display: flex !important;
@@ -31,7 +29,13 @@
     }
 }
 
-@media screen and (min-width: 800px) {
+// medium screen, after 850px
+@media screen and (min-width: 850px) {
+    nav {
+        li {
+            font-size: 115% !important;
+        }
+    }
     .main-page-browse {
 
         .main-cards {
@@ -41,6 +45,7 @@
     }
 }
 
+// larger screen, after 1300px
 @media screen and (min-width: 1300px) {
     footer {
         flex-direction: row;
@@ -55,17 +60,4 @@
     }
 }
 
-// @media screen and (max-width: 768px) {
-//     nav {
-//         padding-inline: 30px;
-//         justify-content: space-between;
-//         ul {
-//             display: none;
-//         }
-
-//         .searchbox {
-//             display: none;
-//         }
-//     }
-// }
-
+// change fontsize on nav links el

@@ -20,15 +20,11 @@ function createToken(id) {
 }
 
 // SIGNUP
-module.exports.signup_get = (req, res) => res.send("YP");
-
 module.exports.signup_post = async (req, res) => {
     const { username, email, password } = req.body;
     
     try {
-        const information = [];
-        const user = await User.create({username, email, password});
-        // const token = createToken(user._id);
+        await User.create({username, email, password});
 
         res.status(201).json({redirect: true});
     } catch (err) {
@@ -37,13 +33,7 @@ module.exports.signup_post = async (req, res) => {
     }
 }
 
-
-
-
-
 // LOGIN
-module.exports.login_get = (req, res) => res.render("login", {user: res.user});
-
 module.exports.login_post = async (req, res) => {
     const { username_email, password } = req.body;
 
@@ -51,7 +41,7 @@ module.exports.login_post = async (req, res) => {
         console.log("bedore")
         const user = await User.login(username_email, password);
         const token = createToken(user._id);
-        console.log(user)
+        console.log(token)
         res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
         res.status(200).json({ user: user._id });
     } catch (err) {
@@ -59,15 +49,20 @@ module.exports.login_post = async (req, res) => {
         // res.status(400).json({errors});
     }
 }
-// why get not async
+// why is get not async
 
 // LOGOUT
 module.exports.logout_get = (req, res) => {
     res.cookie('jwt', '', { maxAge: 1, httpOnly: true});
     res.redirect('/');
 }
+// res.header('Access-Control-Allow-Origin', req.headers.origin);
+// res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
 // USER
 module.exports.user_get = async (req, res) => {
+    console.log(req.headers['authorization']);
+    // res.setHeader("Access-Control-Allow-Credentials", "true");
     // need middleware
+    res.json(res.user)
 }
