@@ -14,16 +14,9 @@ export default function _Browse() {
                 const dataAnime = await resAnime.json();
                 const dataManga = await resManga.json();
 
-                console.log(dataAnime.data)
-
-                console.log(dataAnime)
-                console.log(dataManga)
-
+                // why await?
                 await setAnimeData(dataAnime.data);
                 await setMangaData(dataManga.data);
-
-                console.log(animeData)
-
 
 
             } catch (err) {

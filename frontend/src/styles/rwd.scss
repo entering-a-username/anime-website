@@ -45,8 +45,53 @@
     }
 }
 
+@media screen and (min-width: 950px) {
+    header {
+
+        .header-info {
+            flex-direction: row;
+            justify-content: space-around;
+            column-gap: 60px;
+
+            div {
+                padding-inline: 20px;
+                font-size: 130%;
+                gap: 30px;
+            }
+        }
+    }
+}
+
 // larger screen, after 1300px
 @media screen and (min-width: 1300px) {
+    
+    header {
+        .header-info {
+            div {
+                text-align: center;
+            }
+        }
+    }
+
+    .main-page-browse {
+
+        .categories {
+            font-size: 140%;
+        }
+
+        .main-cards {
+            .card {
+                width: 300px;
+                height: 500px;
+
+                img {
+                    width: 100%;
+                    height: 400px;
+                }
+            }
+        }
+    }
+
     footer {
         flex-direction: row;
 
@@ -59,5 +104,3 @@
         }
     }
 }
-
-// change fontsize on nav links el
