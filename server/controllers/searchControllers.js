@@ -24,6 +24,7 @@ async function searchManga(searchStr) {
             // status: manga.airInfo.status,
         }
     })
+
     return result;
 }
 
@@ -46,16 +47,28 @@ async function searchAnime(searchStr) {
             // status: anime.airInfo.status,
         }
     })
+
     return result;
 }
 
 module.exports.search = async (req, res) => {
     console.log(req.body.animanga)
+    // get rid of hentai
     try {
         const animeResult = await searchAnime(req.body.animanga);
         const mangaResult = await searchManga(req.body.animanga);
-        const sumArr = [animeResult, mangaResult];
-        console.log(sumArr)
+        const sumArr = [];
+
+        for (let i = 0; i < 25; i++) {
+            if (animeResult[i] != null) {
+                sumArr.push(animeResult[i]);
+            }
+            if (mangaResult[i] != null) {
+                sumArr.push(mangaResult[i]);
+            }
+            
+        }
+
         res.json(sumArr);
 
     } catch (err) {

@@ -8,6 +8,9 @@ import Signup from './Signup'
 import { RiMoonClearLine, RiSunLine, RiUserFill, RiSearch2Line, RiArrowDownSLine, RiMoonLine } from '@remixicon/react'
 
 export default function Navbar({user, logout}) {
+    // ??????????????????? on searcharb deafult to typing when opened
+
+    
     const [navState, setNavState] = useState(false);
     function toggleNav() {
         setNavState(!navState);
@@ -52,7 +55,21 @@ export default function Navbar({user, logout}) {
         {
             name: "Recommend", path: "/recommend",
         }
-    ]
+    ];
+
+
+    
+    async function search(e) {
+        e.preventDefault();
+        // const res = await fetch('http://localhost:3050/search', {
+        //     method: 'POST',
+        //     body: JSON.stringify({ animanga }),
+        //     headers: { 'Content-Type': 'application/json' },
+        //     // credentials: "include",
+        // });
+
+        window.location.href = `/browse?searchQuery=${encodeURIComponent(e.target.search.value)}`
+    }
 
   return (
     <>
@@ -86,10 +103,12 @@ export default function Navbar({user, logout}) {
            
 
             <div className="icons">
-                <div className={`searchbox ${searchState ? "active" : ""}`}>
-                        <RiSearch2Line className="search-icon" onClick={toggleSearch} />
-                        <input type="text" placeholder='Search...' />
-                </div>
+                <form onSubmit={search}>
+                    <div className={`searchbox ${searchState ? "active" : ""}`}>
+                            <RiSearch2Line className="search-icon" onClick={toggleSearch} />
+                            <input name="search" type="text" placeholder='Search...' />
+                    </div>
+                </form>
 
                 {(localStorage.getItem("theme") == "false" ? <RiMoonLine onClick={toggleTheme} /> : <RiSunLine onClick={toggleTheme} /> )}
                 
