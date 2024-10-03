@@ -10,7 +10,10 @@ if nav active not being able o hover
 do i use prisma
 
 welcome usernameif user is logged in on main
+flash message hwne user sings in
 
+
+-- logout functionality not working fully
 
 navbar - done i think? some user links left
 header - not done

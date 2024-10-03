@@ -161,7 +161,7 @@ main.browse {
 
 
 
-
+// R E C O M M E N D
 main.recommend {
     height: 100vh;
     text-align: center;
@@ -215,7 +215,268 @@ main.recommend {
 }
 
 
+// P R O F I L E
+main.profile {
+    padding-top: calc(var(--nav-height) + 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    // height: 100vh;
+
+    .user-info {
+        border-radius: 6px;
+        padding-top: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(233, 230, 230);
+        width: 90%;
+        padding-bottom: 20px;
+        position: relative;
+        
+        a {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 1.25em;
+        }
+        
+
+        .img-div {
+            width: 200px;
+            aspect-ratio: 1 / 1;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            margin-top: 10px;
+
+            span {
+
+            }
+        }
+
+        h3 {
+            font-size: 1em;
+            color: gray;
+            margin-top: 3px;
+        }
+
+        h2 {
+            margin-top: 5px;
+            font-size: 1.25em;
+        }
+
+        .interact-btns {
+            margin-top: 10px;
+            display: flex;
+            column-gap: 10px;
+
+            button {
+                border: none;
+                cursor: pointer;
+                padding: 10px 15px;
+                transition: 0.4s ease-in-out;
+                border-radius: 3px;
+
+                &:first-child {
+                    background-color: rgba(0, 145, 255, 1);
+                    color: white;
+
+                    &:hover {
+                        background-color: rgba(5, 105, 182, .8);
+                    }
+                }
+
+                &:nth-child(2) {
+
+                    &:hover {
+                        background-color: rgb(215, 213, 213);
+                    }
+                }
+            }
+
+            
+        }
+    }
+
+    .profile-nav {
+        margin-top: 50px;
+        width: 100%;
+        background-color: rgb(233, 230, 230);
+        padding: 30px 20px;
+
+        ul {
+            display: flex;
+            column-gap: 30px;
+            font-size: 1.75em;
+            cursor: pointer;
+            justify-content: space-around;
+            
+        }
+
+        .content {
+            margin-top: 20px;
+        }
+    }
+}
+
+// E D I T  P R O F I L E
+main.edit-profile {
+    padding-top: calc(var(--nav-height) + 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .user-info {
+        border-radius: 6px;
+        padding-top: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(233, 230, 230);
+        width: 90%;
+        padding-bottom: 20px;
+        position: relative;
+
+        .img-div {
+            width: 200px;
+            aspect-ratio: 1 / 1;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            margin-top: 10px;
+
+            span {
+
+            }
+        }
+
+        h3 {
+            font-size: 1em;
+            color: gray;
+            margin-top: 3px;
+        }
+
+        h2 {
+            margin-top: 5px;
+            font-size: 1.25em;
+        }
+
+        .interact-btns {
+            margin-top: 10px;
+            display: flex;
+            column-gap: 10px;
+
+            button {
+                border: none;
+                cursor: pointer;
+                padding: 10px 15px;
+                transition: 0.4s ease-in-out;
+                border-radius: 3px;
+
+                &:first-child {
+                    background-color: rgba(0, 145, 255, 1);
+                    color: white;
+
+                    &:hover {
+                        background-color: rgba(5, 105, 182, .8);
+                    }
+                }
+
+                &:nth-child(2) {
+
+                    &:hover {
+                        background-color: rgb(215, 213, 213);
+                    }
+                }
+            }
+
+            
+        }
+    }
+
+    .inputs {
+        margin-top: 50px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        background-color: rgb(233, 230, 230);
+        width: 90%;
+        row-gap: 10px;
+
+        .first-div, .biography-div, .socials {
+            display: flex;
+            flex-direction: column;
+            row-gap: 6px;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                row-gap: 10px;
+                margin-top: 8px;
+            }
+
+            textarea {
+                resize: none;
+                outline: none;
+                padding: 10px 16px;
+                font-size: 1.25em;
+            }
+        }
+
+        .btns {
+            display: flex;
+            justify-content: end;
+            column-gap: 30px;
+            font-size: 1.5em;
+            align-items: center;
+
+            a {
+                color: rgb(82, 4, 4);
+                font-weight: bold;
+            }
+
+            button {
+                cursor: pointer;
+                padding: 6px 25px;
+                font-size: .9em;
+                background-color: rgb(0, 183, 0);
+                border: green;
+                border-radius: 4px;
+            }
+        }
+
+        select {
+            padding: 10px 16px;
+            font-size: 1.25em;
+        }
+
+        input {
+            border-radius: 5px;
+            outline: none;
+            padding: 10px 16px;
+            font-size: 1.25em;
+
+        }
+
+        label {
+            font-size: 1.5em;
+        }
+
+
+    }
+}
 
 
 

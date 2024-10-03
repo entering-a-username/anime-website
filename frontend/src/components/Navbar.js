@@ -10,7 +10,7 @@ import { RiMoonClearLine, RiSunLine, RiUserFill, RiSearch2Line, RiArrowDownSLine
 export default function Navbar({user, logout}) {
     // ??????????????????? on searcharb deafult to typing when opened
 
-    
+
     const [navState, setNavState] = useState(false);
     function toggleNav() {
         setNavState(!navState);
@@ -61,12 +61,6 @@ export default function Navbar({user, logout}) {
     
     async function search(e) {
         e.preventDefault();
-        // const res = await fetch('http://localhost:3050/search', {
-        //     method: 'POST',
-        //     body: JSON.stringify({ animanga }),
-        //     headers: { 'Content-Type': 'application/json' },
-        //     // credentials: "include",
-        // });
 
         window.location.href = `/browse?searchQuery=${encodeURIComponent(e.target.search.value)}`
     }
@@ -147,7 +141,7 @@ export default function Navbar({user, logout}) {
 
         </nav>
 
-        <Sidebar className={`${navState ? "open" : "closed"}`}  />
+        <Sidebar className={`${navState ? "open" : "closed"}`} user={user} logout={logout}  />
     </>
 
 

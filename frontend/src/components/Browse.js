@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom';
 export default function Browse() {
 
   const [fetchedData, setFetchedData] = useState([]);
+  const [resultName, setResultName] = useState(null);
+  const [inputValue, setInputValue] = useState(null);
 
   const location = useLocation();
 
@@ -19,6 +21,8 @@ export default function Browse() {
 
     if (searchQuery) {
       fetchData(searchQuery);
+      setInputValue(searchQuery);
+      setResultName(searchQuery);
     }
 
   }, [location.search]);
@@ -29,6 +33,8 @@ export default function Browse() {
     e.preventDefault();
     const animanga = e.target.animanga.value;
     fetchData(animanga);
+    setInputValue(animanga);
+    setResultName(animanga);
   }
 
   async function fetchData(animanga) {
@@ -51,7 +57,6 @@ export default function Browse() {
     }
   }
 
-  const [inputValue, setInputValue] = useState(null);
 
   return (
     <>
@@ -64,7 +69,7 @@ export default function Browse() {
     {/* search icon not responsive */}
             <form onSubmit={submit}>
                 <div className="">
-                    <input value={inputValue} type="text" name="animanga" placeholder='Search...' />
+                    <input type="text" name="animanga" placeholder={inputValue ? inputValue : "Search..."} />
                     <RiSearchLine className="search-icon" />
                 </div>
 
@@ -75,9 +80,16 @@ export default function Browse() {
 
             </div>
 
+            {
+              resultName && <h1>Results for {resultName}</h1>
+            }
+
+
             <div className="cards">
 
               {
+
+                
                 fetchedData != null ?
                   fetchedData.map(item => (
                     // <h1>t</h1>

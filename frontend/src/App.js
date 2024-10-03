@@ -10,6 +10,8 @@ import Browse from "./components/Browse";
 import Recommend from "./components/Recommend";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Profile from "./components/Profile";
+import EditProfile from "./components/EditProfile";
 
 
 function App() {
@@ -86,6 +88,8 @@ function App() {
             <Route path="/recommend" element={<Recommend />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
 
 
           </Routes>
