@@ -14,7 +14,7 @@ do i just add loading to every ocmpontent
 
 welcome usernameif user is logged in on main
 flash message hwne user sings in
-
+ 
 
 -- logout functionality not working fully
 
