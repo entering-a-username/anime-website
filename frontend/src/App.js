@@ -19,6 +19,7 @@ function App() {
   // one user check or for every route
 
   const [user, setUser] = useState(null);
+  
 
   function extractCookie(cookie) {
     const value = `; ${document.cookie}`;
@@ -50,16 +51,14 @@ function App() {
 
         if (data._id) {
           setUser(data._id);
-          console.log(user)
         }
 
-        console.log(user)
       } catch (err) {
 
       }
     }
 
-    fetchUser()
+    fetchUser();
   }, []);
 
   console.log(user)
@@ -88,8 +87,9 @@ function App() {
             <Route path="/recommend" element={<Recommend />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/profile" element={<Profile user={user} />} />
+            <Route path="/profile/:username" element={<Profile />} />
+            <Route path="/edit-profile" element={<EditProfile user={user} />} />
 
 
           </Routes>

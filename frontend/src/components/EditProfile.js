@@ -1,61 +1,168 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { RiMessageLine, RiLink, RiUserAddLine } from '@remixicon/react'
 
-export default function EditProfile() {
+export default function EditProfile({user}) {
     // textaarea letters limit implement
-    // edit btn color gray if nothinh is changed
-    // real usernames as placeholder
+    // going back from updated pofile hsould give error
+    // deleting to same input should count as nit changed
 
+    const [profileInfo, setProfileInfo] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [isChanged, setIsChanged] = useState(false);
+
+    // edited info states
+    const [username, setUsername] = useState(null);
+    const [country, setCountry] = useState(null);
+    const [bio, setBio] = useState(null);
+    const [socials, setSocials] = useState(null);
+
+
+    // fetch data when loaded
+    useEffect(() => {
+        async function fetchProfileInfo() {
+            try {
+                setLoading(true);
+
+                if (user) {
+                    const res = await fetch("http://localhost:3050/api/profile", {
+                        method: "GET",
+                        credentials: "include",
+                        headers: {
+                            'Authorization': user,
+                        }
+                    });
+
+                    const data = await res.json();
+
+                    setProfileInfo(data);
+                    setLoading(false);
+                }
+            } catch (err) {
+                setLoading(false);
+                console.error(err);
+            }
+        }
+
+        fetchProfileInfo();
+
+        // not working without this????
+    }, [user]);
+
+
+    function handleInputChange() {
+        setIsChanged(true);
+    }
+   
     async function edit(e) {
         e.preventDefault();
 
+        const newUsername = e.target.username.value.trim();
+        const newCountry = e.target.country.value;
+        const newBio = e.target.biography.value.trim();
+        const newInstagram = e.target.instagram.value.trim();
+        const newTwitter = e.target.twitter.value.trim();
+        const newFacebook = e.target.facebook.value.trim();
+        const newDiscord = e.target.discord.value.trim();
+
+        let isChanged = false;
+
+        const editedObject = {
+            socials: {},
+        };
+
+        // maybe there's another way?
+        if (newUsername !== profileInfo.username) {
+            editedObject.username = newUsername;
+            isChanged = true;
+        }
+    
+        if (newCountry !== profileInfo.country) {
+            editedObject.country = newCountry;
+            isChanged = true;
+        }
+    
+        if (newBio !== profileInfo.bio) {
+            editedObject.bio = newBio;
+            isChanged = true;
+        }
+    
+        if (newInstagram !== profileInfo.socials.instagram) {
+            editedObject.socials.instagram = newInstagram;
+            isChanged = true;
+        }
+    
+        if (newTwitter !== profileInfo.socials.twitter) {
+            editedObject.socials.twitter = newTwitter;
+            isChanged = true;
+        }
+    
+        if (newFacebook !== profileInfo.socials.facebook) {
+            editedObject.socials.facebook = newFacebook;
+            isChanged = true;
+        }
+    
+        if (newDiscord !== profileInfo.socials.discord) {
+            editedObject.socials.discord = newDiscord;
+            isChanged = true;
+        }
+
+        if (!isChanged) {
+            // no changes detected
+            setIsChanged(false);
+            return;
+        }
+
+        try {
+            const res = await fetch("http://localhost:3050/api/profile", {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': user,
+                },
+                body: JSON.stringify(editedObject),
+            })
+
+            const data = await res.json();
+
+            if (data.redirect) {
+                window.location.href = "/profile";
+                // flash message
+            }
+
+            setIsChanged(false);
+        } catch (err) {
+            console.error(err);
+        }
+
     }
+
+    if (loading) {
+        // loading component
+        return <p>LOADING</p>
+    }
+
   return (
     <>
         <main className="edit-profile">
             
-            <div className="user-info">
-                <div className="img-div">
-                    <img src="" alt="" />
-                </div>
-
-                <h1>USERNAME <span>FLAG</span> </h1>
-                <h3>JOINED DATE</h3>
-                <h2>last online</h2>
-
-                <div className="interact-btns">
-                    <button><RiMessageLine size={25}></RiMessageLine></button>
-                    <button><RiUserAddLine size={25}></RiUserAddLine></button>
-
-                </div>
-
-                <h2>FOLLOWERS FOLLOWING</h2>
-
-                <p>BIOGRAPHY IF EXISTS</p>
-                {/* link add system */}
-
-                <div className="social">
-                    <span>Find me on</span>
-                    <div className="links">
-
-                    </div>
-                </div>
-                    
-
-            </div>
-
+           
             <form className="inputs" onSubmit={edit}>
                 <h1>Edit your profile</h1>
 
                 <div className="first-div">
                     <div>
                         <label htmlFor="username">Username</label>
-                        <input type="text" name="username" placeholder='username' />
+                        <input
+                        onChange={handleInputChange}
+                        type="text" name="username" defaultValue={profileInfo.username} placeholder="username" />
                     </div>
 
                     <div>
                         <label htmlFor="country">Country</label>
-                        <select>
+                        <select
+                        onChange={handleInputChange}
+                        name="country" defaultValue={profileInfo.country} >
+                            <option value="BLANK"> </option>
                             <option value="AF">Afghanistan</option>
                             <option value="AX">Åland Islands</option>
                             <option value="AL">Albania</option>
@@ -311,7 +418,9 @@ export default function EditProfile() {
 
                 <div className="biography-div">
                     <label htmlFor="biography">Biography</label>
-                    <textarea name="biography" placeholder='biography'></textarea>
+                    <textarea
+                    onChange={handleInputChange}
+                    name="biography" placeholder="bio" defaultValue={profileInfo.bio}></textarea>
                 </div>
 
                 <h2>Social Media</h2>
@@ -319,28 +428,36 @@ export default function EditProfile() {
                 <div className="socials">
                     <div>
                         <label htmlFor="instagram">Instagram</label>
-                        <input type="text" name="instagram" placeholder='Instagram' />
+                        <input
+                        onChange={handleInputChange}
+                        type="text" name="instagram" placeholder={profileInfo.socials.instagram || "instagram"} />
                     </div>
 
                     <div>
                         <label htmlFor="twitter">Twitter</label>
-                        <input type="text" name="twitter" placeholder='Twitter' />
+                        <input
+                        onChange={handleInputChange} 
+                        type="text" name="twitter" placeholder={profileInfo.socials.twitter || "twitter"} />
                     </div>
 
                     <div>
                         <label htmlFor="facebook">Facebook</label>
-                        <input type="text" name="facebook" placeholder='Facebook' />
+                        <input
+                        onChange={handleInputChange}
+                        type="text" name="facebook" placeholder={profileInfo.socials.facebook || "facebook"} />
                     </div>
 
                     <div>
                         <label htmlFor="discord">Discord</label>
-                        <input type="text" name="discord" placeholder='Discord' />
+                        <input
+                        onChange={handleInputChange}
+                        type="text" name="discord" placeholder={profileInfo.socials.discord || "discord user"} />
                     </div>
                 </div>
 
                 <div className="btns">
                     <a href="/profile">Cancel</a>
-                    <button type="submit">Edit</button>
+                    <button disabled={!isChanged} type="submit">Edit</button>
                 </div>
 
 

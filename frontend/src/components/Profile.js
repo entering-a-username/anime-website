@@ -1,75 +1,150 @@
-import React, { useState } from 'react'
-import { RiMessageLine, RiLink, RiUserAddLine } from '@remixicon/react'
+import React, { useState, useEffect } from 'react'
+import { RiMessageLine, RiLink, RiUserAddLine, RiInstagramLine, RiFacebookLine, RiTwitterLine, RiDiscordLine } from '@remixicon/react'
+import { useParams } from 'react-router-dom';
+import { getFlags } from "../utils/flags";
 
-export default function Profile() {
+export default function Profile({user}) {
 
+    
     const [activeTab, setActiveTab] = useState("blogs");
+    const [profileInfo, setProfileInfo] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    const { username } = useParams();
+
+    const isOwnProfile = username ? false : true;
+
+    // flag emoji
+    // const flag = getFlags(profileInfo.country);
 
     function handleTabChange(tab) {
         setActiveTab(tab);
     }
 
-    // ADD PROFILE TO SIDEBAR LOGIN SIGNIP
-    // general template layout, with own will have logic
+    // links section
+    const socialIcons = {
+        instagram: <RiInstagramLine size={40} />,
+        facebook: <RiFacebookLine size={40} />,
+        twitter: <RiTwitterLine size={40} />,
+        discord: <RiDiscordLine size={40} />,
+    };
+
+    useEffect(() => {
+        async function fetchProfile() {
+            try {
+                setLoading(true);
+                let res;
+
+                if (username) {
+                    res = await fetch(`http://localhost:3050/api/profile?username=${username}`);
+                } else if (user) {
+                    res = await fetch("http://localhost:3050/api/profile", {
+                        method: "GET",
+                        credentials: "include",
+                        headers: {
+                            'Authorization': user,
+                        }
+                    })
+                }
+
+                const data = await res.json();
+                setProfileInfo(data);
+                setLoading(false);
+            } catch (err) {
+                console.error(err);
+                setLoading(false);
+            }
+        }
+ 
+        fetchProfile();
+    }, [username, user]);
+
+    if (loading) {
+        return <p>LOADING</p>
+    }
+
+    if (!profileInfo) {
+        return <p>not ofund</p>
+    } 
+
   return (
 
-
-    // CARD COMPONENT FOR DISPLAY??
     <>
 
         <main className="profile">
+    {/* setup multer for picture */}
+    
+            {
+                profileInfo && (
+                    <>
+                            <div className="user-info">
 
-            <div className="user-info">
+                                {!username && (
+                                    <a className="edit-link" href="/edit-profile">Edit Profile</a>
+                                )}
 
-                <a href="/edit-profile">Edit Profile</a>
-                
-                <div className="img-div">
-                    <img src="" alt="" />
-                </div>
+                                <div className="img-div">
+                                    <img src="" alt="" />
+                                </div>
 
-                <h1>USERNAME <span>FLAG</span> </h1>
-                <h3>JOINED DATE</h3>
-                <h2>last online</h2>
-                
+                                <h1> {profileInfo.username} <span> {getFlags(profileInfo.country)} </span> </h1>
+                                <h3>Joined {new Date(profileInfo.joinedDate).toLocaleDateString('en-US', {day: 'numeric', month: 'long', year: 'numeric'})} </h3>
+                                <h2>last online</h2>
 
-                <div className="interact-btns">
-                    <button><RiMessageLine size={25}></RiMessageLine></button>
-                    <button><RiUserAddLine size={25}></RiUserAddLine></button>
+                                <div className="interact-btns">
+                                    <button disabled={isOwnProfile}><RiMessageLine size={25}></RiMessageLine></button>
+                                    <button disabled={isOwnProfile}><RiUserAddLine size={25}></RiUserAddLine></button>
 
-                </div>
+                                </div>
 
-{/* unfollow lfollow systme */}
-                <h2>FOLLOWERS FOLLOWING</h2>
+                                {/* unfollow lfollow systme */}
+                                <h2>FOLLOWERS FOLLOWING</h2>
 
-                <p>BIOGRAPHY IF EXISTS</p>
-                {/* link add system */}
+                                <p>{ profileInfo.bio }</p>
 
-                <div className="social">
-                    <span>Find me on</span>
-                    <div className="links">
+                                {
+                                    profileInfo.socials && (
+                                        <div className="social">
+                                            <span>Find me on</span>
+                                            <div className="links">
 
-                    </div>
-                </div>
+{/* on hover show username? valdiate links */}
+                                                {Object.keys(profileInfo.socials).map(link => (
+                                                    profileInfo.socials[link] && (
+                                                        <a key={link} className="icon" href={profileInfo.socials[link]} target="_blank">
+                                                            {socialIcons[link]}
+                                                        </a>
+                                                    )
+                                                ))}
+                                            </div>  
+                                        </div>
+                                    )
+                                }
 
 
-            
-            </div>
 
-            <div className="profile-nav">
-                <ul>
-                    <li onClick={() => handleTabChange('blogs')} className={activeTab === 'blogs' ? 'active' : ''}>Blogs</li>
-                    <li onClick={() => handleTabChange('polls')} className={activeTab === 'polls' ? 'active' : ''}>Polls</li>
-                    <li onClick={() => handleTabChange('reviews')} className={activeTab === 'reviews' ? 'active' : ''}>Reviews</li>
+                                </div>
 
-                </ul>
+                                <div className="profile-nav">
+                                <ul>
+                                    <li onClick={() => handleTabChange('blogs')} className={activeTab === 'blogs' ? 'active' : ''}>Blogs</li>
+                                    <li onClick={() => handleTabChange('polls')} className={activeTab === 'polls' ? 'active' : ''}>Polls</li>
+                                    <li onClick={() => handleTabChange('reviews')} className={activeTab === 'reviews' ? 'active' : ''}>Reviews</li>
 
-                <div className="content">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, quibusdam minus, sit inventore sed impedit maxime ducimus rerum nulla quam sequi eaque aspernatur ipsum quisquam. Dignissimos fugit ab inventore! Ipsum consectetur quaerat vel quia reprehenderit distinctio a iure nulla ab minus exercitationem illum earum magni optio, pariatur non ipsam ipsa eius reiciendis, animi quam? Earum eaque et velit obcaecati optio rerum eligendi libero! Sit alias aut consectetur quae voluptates magnam vero odio ipsam exercitationem doloremque inventore dolor delectus consequuntur ducimus magni, facilis eveniet nesciunt dolorem eligendi quis aperiam. Ullam esse deserunt quae? Odio, accusamus laborum nemo nihil veniam exercitationem fugit.
-                    {/* {activeTab === 'blogs' && <BlogsComponent />}
-                    {activeTab === 'polls' && <PollsComponent />}
-                    {activeTab === 'reviews' && <ReviewsComponent />} */}
-                </div>
-            </div>
+                                </ul>
+
+                                <div className="content">
+                                    
+                                    {/* {activeTab === 'blogs' && <BlogsComponent />}
+                                    {activeTab === 'polls' && <PollsComponent />}
+                                    {activeTab === 'reviews' && <ReviewsComponent />} */}
+                                </div>
+                            </div>
+                    </>
+                )
+            }
+
+
         </main>
 
         {/* show more and antoher page on lcick */}

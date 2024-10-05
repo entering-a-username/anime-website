@@ -5,15 +5,51 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
+        required: true,
     },
     email: {
         type: String,
         lowercase: true,
         unique: true,
+        required: true,
     },
     password: {
         type: String,
+        required: true,
     },
+    country: {
+        type: String,
+        default: "",
+    },
+    bio: {
+        type: String,
+        default: null,
+    },
+    socials: {
+        instagram: { type: String, default: null },
+        twitter: { type: String, default: null },
+        facebook: { type: String, default: null },
+        discord: { type: String, default: null },
+    },
+    profilePicture: {
+        type: String,
+        default: null,
+    },
+    joinedDate: {
+        type: Date,
+        default: Date.now,
+    },
+    lastOnline: {
+        type: Date,
+        default: null,
+    },
+    friends: [
+        {
+            // type: mongooseSchema.Types.ObjectId,
+            // ref: "User",
+        }
+    ]
+
 
 })
 

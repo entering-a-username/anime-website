@@ -6,6 +6,7 @@ const cors = require("cors");
 // routes
 const authRoutes = require("./routes/authRoutes");
 const searchRoutes = require("./routes/searchRoutes");
+const APIRoutes = require("./routes/APIRoutes");
 
 require("dotenv").config();
 
@@ -34,5 +35,6 @@ app.get("/", async (req, res) => {
 
 app.use(authRoutes);
 app.use(searchRoutes);
+app.use(APIRoutes);
 
 app.listen(3050);
