@@ -12,7 +12,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
-
+import AnimangaComponent from "./components/AnimangaComponent";
 
 function App() {
   // ?????????// one /user check??
@@ -88,9 +88,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile" element={<Profile user={user} />} />
-            <Route path="/profile/:username" element={<Profile />} />
+            {/* <Route path="/profile/:username" element={<Profile />} /> */}
             <Route path="/edit-profile" element={<EditProfile user={user} />} />
-
+            <Route path="/:type/:id" element={<AnimangaComponent /> } />
 
           </Routes>
           {/* <Browse /> */}

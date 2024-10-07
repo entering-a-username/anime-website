@@ -8,6 +8,7 @@ const client = new Jikan.Client();
 async function searchManga(searchStr) {
     const result = (await client.manga.search(searchStr)).map((manga) => {
         return {
+            manga: manga,
             type: "manga",
             id: manga.id,
             title: manga.title.default,
@@ -21,6 +22,10 @@ async function searchManga(searchStr) {
             synopsis: manga.synopsis,
             episodes: manga.episodes,
             genres: manga.genres,
+            chapters: manga.chapters,
+            volumes: manga.volumes,
+            publishInfo: manga.publishInfo,
+            background: manga.background,
             // status: manga.airInfo.status,
         }
     })
@@ -44,9 +49,13 @@ async function searchAnime(searchStr) {
             synopsis: anime.synopsis,
             episodes: anime.episodes,
             genres: anime.genres,
+            background: anime.background,
+            episodes: anime.episodes,
             // status: anime.airInfo.status,
         }
     })
+
+    console.log(result)
 
     return result;
 }
@@ -71,6 +80,26 @@ module.exports.search = async (req, res) => {
 
         res.json(sumArr);
 
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+module.exports.animanga_get = async (req, res) => {
+    const id = req.params.id;
+    const type = req.params.type;
+    console.log("This")
+
+    try {
+        if (type === "anime") {
+            const animeDetails = await client.anime.get(id);
+            res.json({details: animeDetails});
+        } else if (type === "manga") {
+            const mangaDetails = await client.manga.get(id);
+            res.json({details: mangaDetails});
+        } else {
+            res.status(400).json({error: "invalid type"});
+        }
     } catch (err) {
         console.error(err);
     }

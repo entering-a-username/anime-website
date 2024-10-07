@@ -30,7 +30,6 @@ export default function _Browse() {
 
     const handleCategoryChange = category => setSelectedCategory(category);
 
-
   return (
     <>
         <div className='main-page-browse'>
@@ -47,49 +46,54 @@ export default function _Browse() {
                     // make this cleaner
                     
                     selectedCategory === "Anime" ? 
-                        animeData.slice(0, 15).map(item => (
-                            <div className="card" key={item.mal_id}>
-                                <img src={item.images.jpg.image_url} alt={item.title} />
-                
-                                <div className="info-div">
-                                    <h1>{item.title}</h1>
-                                    <h2>{item.genres.slice(0, 3).map(genre => (
-                                        `${genre.name} `
-                                    ))}</h2>
-                                </div>
-                
-                                <div className="hover-card">
-                                    <h1>{item.title}</h1>
-                                    <span>{Math.round(item.score)} ★ ({Math.round(item.scored_by / 10)})</span>
-                                    <p>{item.synopsis?.substring(0, 160)}...</p>
-                                    <div className="functional-div">
-                                        <RiBookmarkLine size={18} color="" />
-                                        <RiEditLine size={18} />
+                        animeData.slice(0, 15).map((item, index) => (
+                            <a key={index} href={`/anime/${item.mal_id}`} target="_blank">
+                                <div className="card" key={item.mal_id}>
+                                    <img src={item.images.jpg.image_url} alt={item.title} />
+                            
+                                    <div className="info-div">
+                                        <h1>{item.title}</h1>
+                                        <h2>{item.genres.slice(0, 3).map(genre => (
+                                            `${genre.name} `
+                                        ))}</h2>
+                                    </div>
+                                    
+                                    <div className="hover-card">
+                                        <h1>{item.title}</h1>
+                                        <span>{Math.round(item.score)} ★ ({Math.round(item.scored_by / 10)})</span>
+                                        <p>{item.synopsis?.substring(0, 160)}...</p>
+                                        <div className="functional-div">
+                                            <RiBookmarkLine size={18} color="" />
+                                            <RiEditLine size={18} />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )) : mangaData.slice(0, 15).map(item => (
-                            <div className="card" key={item.mal_id}>
-                                <img src={item.images.jpg.image_url} alt={item.title} />
-                
-                                <div className="info-div">
-                                    <h1>{item.title}</h1>
-                                    <h2>{item.genres.slice(0, 3).map(genre => (
-                                        `${genre.name} `
-                                    ))}</h2>
-                                </div>
-    
-                
-                                <div className="hover-card">
-                                    <h1>{item.title}</h1>
-                                    <span>{Math.round(item.score)} ★ ({Math.round(item.scored_by / 10)})</span>
-                                    <p>{item.synopsis?.substring(0, 160)}...</p>
-                                    <div className="functional-div">
-                                        <RiBookmarkLine size={18} color="" />
-                                        <RiEditLine size={18} />
+                            </a>
+                        )) : mangaData.slice(0, 15).map((item, index) => (
+                            <a key={index} href={`/manga/${item.mal_id}`} target='_blank'>
+                                <div className="card" key={item.mal_id}>
+                                    <img src={item.images.jpg.image_url} alt={item.title} />
+                            
+                                    <div className="info-div">
+                                        <h1>{item.title}</h1>
+                                        <h2>{item.genres.slice(0, 3).map(genre => (
+                                            `${genre.name} `
+                                        ))}</h2>
+                                    </div>
+                                    
+                                    
+                                    <div className="hover-card">
+                                        <h1>{item.title}</h1>
+                                        <span>{Math.round(item.score)} ★ ({Math.round(item.scored_by / 10)})</span>
+                                        <p>{item.synopsis?.substring(0, 160)}...</p>
+                                        <div className="functional-div">
+                                            <RiBookmarkLine size={18} color="" />
+                                            <RiEditLine size={18} />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+
+                            </a>
                         ))
                 }
             </section>

@@ -48,6 +48,7 @@ export default function Profile({user}) {
                 }
 
                 const data = await res.json();
+                console.log(data)
                 setProfileInfo(data);
                 setLoading(false);
             } catch (err) {
@@ -123,21 +124,26 @@ export default function Profile({user}) {
 
 
 
-                                </div>
+                            </div>
+
+                            <div className="other-info">
 
                                 <div className="profile-nav">
-                                <ul>
-                                    <li onClick={() => handleTabChange('blogs')} className={activeTab === 'blogs' ? 'active' : ''}>Blogs</li>
-                                    <li onClick={() => handleTabChange('polls')} className={activeTab === 'polls' ? 'active' : ''}>Polls</li>
-                                    <li onClick={() => handleTabChange('reviews')} className={activeTab === 'reviews' ? 'active' : ''}>Reviews</li>
+                                    <ul>
+                                        <li onClick={() => handleTabChange('watchlist')} className={activeTab === 'watchlist' ? 'active' : ''}>Watchlist</li>
+                                        <li onClick={() => handleTabChange('blogs')} className={activeTab === 'blogs' ? 'active' : ''}>Blogs</li>
+                                        <li onClick={() => handleTabChange('polls')} className={activeTab === 'polls' ? 'active' : ''}>Polls</li>
+                                        <li onClick={() => handleTabChange('reviews')} className={activeTab === 'reviews' ? 'active' : ''}>Reviews</li>
+                                    </ul>
+                                    <div className="content">
+                                        {/* {activeTab === 'blogs' && <BlogsComponent />}
+                                        {activeTab === 'polls' && <PollsComponent />}
+                                        {activeTab === 'reviews' && <ReviewsComponent />} */}
+                                    </div>
+                                </div>
 
-                                </ul>
+                                <div className="statistics">
 
-                                <div className="content">
-                                    
-                                    {/* {activeTab === 'blogs' && <BlogsComponent />}
-                                    {activeTab === 'polls' && <PollsComponent />}
-                                    {activeTab === 'reviews' && <ReviewsComponent />} */}
                                 </div>
                             </div>
                     </>

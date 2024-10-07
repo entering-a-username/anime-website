@@ -71,7 +71,6 @@ userSchema.statics.login = async function(username_email, password) {
     let param = username_email.includes("@") ? {email: username_email} : {username: username_email};
     
     const user = await this.findOne(param);
-
     if (user) {
         const auth = await bcrypt.compare(password, user.password);
 
