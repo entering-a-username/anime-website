@@ -25,6 +25,7 @@ module.exports.signup_post = async (req, res) => {
     
     try {
         await User.create({username, email, password});
+        // no save?
 
         res.status(201).json({redirect: true});
     } catch (err) {
@@ -38,10 +39,9 @@ module.exports.login_post = async (req, res) => {
     const { username_email, password } = req.body;
 
     try {
-        console.log("bedore")
         const user = await User.login(username_email, password);
         const token = createToken(user._id);
-        console.log(token)
+        
         res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
         res.status(200).json({ user: user._id });
     } catch (err) {

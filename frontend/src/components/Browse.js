@@ -57,6 +57,7 @@ export default function Browse() {
     }
   }
 
+  console.log(fetchedData)
 
   return (
     <>
@@ -91,29 +92,31 @@ export default function Browse() {
 
                 
                 fetchedData != null ?
-                  fetchedData.map(item => (
+                  fetchedData.map((item, index) => (
                     // <h1>t</h1>
 
-                    <div className="card" key={item.mal_id}>
-                      <img src={item.img} alt={item.title} />
+                      <a key={index} href={`/${item.type}/${item.id}`} target="_blank">
+                          <div className="card" key={item.id}>
+                            <img src={item.img} alt={item.title} />
 
-                      <div className="info-div">
-                          <h1>{item.title}</h1>
-                          <h2>{item.genres.slice(0, 3).map(genre => (
-                              `${genre.name} `
-                          ))}</h2>
-                      </div>
-                        
-                      <div className="hover-card">
-                          <h1>{item.title}</h1>
-                          <span>{Math.round(item.score)} ★ ({Math.round(item.scoredBy / 10)})</span>
-                          <p>{item.synopsis?.substring(0, 160)}...</p>
-                          <div className="functional-div">
-                              <RiBookmarkLine size={18} color="" />
-                              <RiEditLine size={18} />
+                            <div className="info-div">
+                                <h1>{item.title}</h1>
+                                <h2>{item.genres.slice(0, 3).map(genre => (
+                                    `${genre.name} `
+                                ))}</h2>
+                            </div>
+                              
+                            <div className="hover-card">
+                                <h1>{item.title}</h1>
+                                <span>{Math.round(item.score)} ★ ({Math.round(item.scoredBy / 10)})</span>
+                                <p>{item.synopsis?.substring(0, 160)}...</p>
+                                <div className="functional-div">
+                                    <RiBookmarkLine size={18} color="" />
+                                    <RiEditLine size={18} />
+                                </div>
+                            </div>
                           </div>
-                      </div>
-                    </div>
+                      </a>
                   )) : "null"
               }
             

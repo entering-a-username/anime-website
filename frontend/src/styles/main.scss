@@ -459,6 +459,25 @@ header {
     }
 }
 
+// N E W  C O M P
+.new-comp {
+    position: relative;
+    // background-color: #1b1b1b;
+    // background: linear-gradient(to bottom, #1b1b1b, #262626);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+    color: rgb(94, 38, 38);
+    background-color: rgb(237, 161, 18);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+
+    transition: all .5s ease;
+
+    
+
+}
+
 
 // N E W  F E A T U R E
 .new-feature {

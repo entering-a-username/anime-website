@@ -8,7 +8,7 @@ users list on communtiy dropdown
  one huge display function for different browses?
 if nav active not being able o hover
 do i use prisma
-
+RECOMMED NSHOULD ONLY REOCMMEND MANGA ANIME TYPES
 EDIT PROFILE CODE CHANGE
 do i just add loading to every ocmpontent
 

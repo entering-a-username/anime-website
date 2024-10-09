@@ -13,6 +13,8 @@ import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import AnimangaComponent from "./components/AnimangaComponent";
+import Community from "./components/Community";
+
 
 function App() {
   // ?????????// one /user check??
@@ -82,9 +84,10 @@ function App() {
 
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home user={user} />} />
             <Route path="/browse" element={<Browse />} />
             <Route path="/recommend" element={<Recommend />} />
+            <Route path="/community" element={<Community />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile" element={<Profile user={user} />} />

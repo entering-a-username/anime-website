@@ -26,7 +26,7 @@ export default function Recommend() {
             }
         }
 
-        console.log(finalData.genres)
+        console.log(finalData)
         setFetchedData(finalData);
     }
 
@@ -57,20 +57,10 @@ export default function Recommend() {
                                 `${genre.name} `
                             ))}</h2>
                         </div>
-                        
-                        {/* <div className="hover-card">
-                            <h1>{fetchedData.title}</h1>
-                            <span>{Math.round(fetchedData.score)} ★ ({Math.round(fetchedData.scored_by / 10)})</span>
-                            <p>{fetchedData.synopsis?.substring(0, 160)}...</p>
-                            <div className="functional-div">
-                                <RiBookmarkLine size={18} color="" />
-                                <RiEditLine size={18} />
-                            </div>
-                        </div> */}
                     </>
                 )}
             </div>
-
+            <a href={`/${fetchedData.type}/${fetchedData.mal_id}`} target="_blank">See More</a>
             
         </main>
     </>

@@ -4,6 +4,7 @@ const User = require('../models/User');
 
 function checkUser(req, res, next) {
     const token = req.headers['authorization'];
+    console.log("t")
     console.log(token)
 
     if (token) {
@@ -13,6 +14,7 @@ function checkUser(req, res, next) {
                 console.log(err)
                 next();
             } else {
+                console.log("good")
                 const user = await User.findById(decodedToken.id);
                 res.user = user;
                 next();

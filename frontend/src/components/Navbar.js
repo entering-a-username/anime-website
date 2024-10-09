@@ -54,6 +54,9 @@ export default function Navbar({user, logout}) {
         },
         {
             name: "Recommend", path: "/recommend",
+        },
+        {
+            name: "Community", path: "/community",
         }
     ];
 
@@ -81,7 +84,7 @@ export default function Navbar({user, logout}) {
                 )) }
                 
 
-                <div className="dropdown">
+                {/* <div className="dropdown">
                     <li className='dropdown-el'>
                         <span>Community</span>
                         <RiArrowDownSLine size={18} />
@@ -91,7 +94,7 @@ export default function Navbar({user, logout}) {
                         <Link to="/forums" className={`${location.pathname == "/forums" ? "active" : ""}`}>Forums</Link>
                         <Link to="/polls" className={`${location.pathname == "/polls" ? "active" : ""}`}>Polls</Link>
                     </div>
-                </div>
+                </div> */}
             </ul>
 
            
